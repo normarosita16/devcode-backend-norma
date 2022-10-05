@@ -4,12 +4,8 @@ const express = require("express");
 const glob = require("glob");
 const methodOverride = require("method-override");
 
-const scheduler = require("../scheduler");
-
 exports.start = (config) => {
   const app = express();
-
-  app.use(helmet());
 
   app.use(cors());
 
