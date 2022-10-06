@@ -12,8 +12,8 @@ const Op = db.Sequelize.Op;
 exports.create = async (req, res) => {
   const { activity_group_id, title } = req.body;
 
-  if (!title) {
-    res.status(400).send({ message: "title cannot be null" });
+  if (!title && !activity_group_id) {
+    res.status(400).send({ message: "title and activity_group_id cannot be null" });
   } else {
     TodoItem.create({
       activity_group_id,
