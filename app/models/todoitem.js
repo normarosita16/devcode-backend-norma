@@ -1,9 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
-const {
-  TODOITEM_MODEL_NAME,
-  TODOITEM_TABLE_NAME,
-} = require("../fixtures/todoitem.fixture");
+
 
 module.exports = (sequelize, DataTypes) => {
   class TodoItem extends Model {
