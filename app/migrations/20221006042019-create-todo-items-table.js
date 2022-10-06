@@ -4,7 +4,7 @@ const TODOITEM_TABLE_NAME = require("../fixtures/todoitem.fixture");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("todoitems", {
+    await queryInterface.createTable("todos", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -22,6 +22,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("todoitems");
+    await queryInterface.dropTable("todos");
   },
 };
