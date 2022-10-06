@@ -12,18 +12,22 @@ const Op = db.Sequelize.Op;
 exports.create = async (req, res) => {
   const { activity_group_id, title } = req.body;
 
-  TodoItem.create({
-    activity_group_id,
-    title,
-    is_active: 1,
-    priority: "very-high",
-  })
-    .then((result) => {
-      res.status(httpStatus.OK).json(response.success(httpStatus.OK, result));
+  if (!title) {
+    res.status(400).send({ message: "title cannot be null" });
+  } else {
+    TodoItem.create({
+      activity_group_id,
+      title,
+      is_active: 1,
+      priority: "very-high",
     })
-    .catch((err) => {
-      res.status(500).send({ message: err.message });
-    });
+      .then((result) => {
+        res.status(httpStatus.OK).json(response.success(httpStatus.OK, result));
+      })
+      .catch((err) => {
+        res.status(500).send({ message: err.message });
+      });
+  }
 };
 
 exports.list = (req, res) => {
@@ -66,22 +70,24 @@ exports.view = (req, res) => {
 exports.update = async (req, res) => {
   const { title } = req.body;
 
-  TodoItem.update(
-    {
-      title,
-    },
-    {
-      where: { id: req.params.id },
-    }
-  )
-    .then((result) => {
-      response
-        .update(req, res)
-        .updateResponse(result, req.params.id, "Syarat & Ketentuan");
-    })
-    .catch((err) => {
-      res.status(500).send({ message: err.message });
-    });
+  if (!title) {
+    res.status(400).send({ message: "title cannot be null" });
+  } else {
+    TodoItem.update(
+      {
+        title,
+      },
+      {
+        where: { id: req.params.id },
+      }
+    )
+      .then((result) => {
+        response.update(req, res).updateResponse(result, req.params.id);
+      })
+      .catch((err) => {
+        res.status(500).send({ message: err.message });
+      });
+  }
 };
 
 exports.delete = async (req, res) => {
