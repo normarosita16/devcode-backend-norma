@@ -68,17 +68,18 @@ exports.view = (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const { title } = req.body;
+  const { title, is_active, priority } = req.body;
 
-  if (!title) {
-    res.status(400).send({ message: "title cannot be null" });
-  } else {
+ 
+    
     TodoItem.update(
       {
         title,
+        is_active,
+        priority
       },
       {
-        where: { id: req.params.id },
+        where: { id: req.params.id, deletedAt: null },
       }
     )
       .then((result) => {
@@ -87,7 +88,7 @@ exports.update = async (req, res) => {
       .catch((err) => {
         res.status(500).send({ message: err.message });
       });
-  }
+  
 };
 
 exports.delete = async (req, res) => {
