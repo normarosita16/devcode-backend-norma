@@ -1,6 +1,6 @@
 "use strict";
 
-const TODOITEM_TABLE_NAME = require("../fixtures/todoitem.fixture");
+
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
