@@ -5,6 +5,9 @@ const glob = require("glob");
 const methodOverride = require("method-override");
 
 const todoItemRoute = require("../routes/todo-item-route");
+const activityGroupRoute = require("../routes/activity-group-route");
+
+
 
 exports.start = (config) => {
   const app = express();
@@ -30,7 +33,8 @@ exports.start = (config) => {
   });
 
   app.use("/todo-items", todoItemRoute);
-
+  app.use("/activity-group",activityGroupRoute );
+  
   // glob
   //   .sync(`${__dirname}/../controllers/todo-item/route.js`)
   //   .forEach(async (routeFile) => {
