@@ -54,27 +54,28 @@ exports.create = async (req, res) => {
 
 exports.list = (req, res) => {
 
-  const { activity_group_id, size, page } = req.query;
+  const { size, page } = req.query;
 
   const limit = size ? size : 10;
 
   const offset = page ? page * limit : 0;
 
-  var condition = activity_group_id
+  
 
-    ? { activity_group_id: { [Op.eq]: activity_group_id } }
+    
 
-    : null;
+    
 
-  console.log(activity_group_id);
+  
 
-  TodoItem.findAndCountAll({
+
+  ActivityGroup.findAndCountAll({
 
     limit,
 
-    offset,
+    offset
 
-    where: condition,
+    
 
   })
 
