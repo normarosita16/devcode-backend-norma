@@ -102,7 +102,7 @@ exports.list = (req, res) => {
 
 exports.view = (req, res) => {
 
-  TodoItem.findByPk(req.params.id)
+  ActivityGroup.findByPk(req.params.id)
 
     .then((result) => {
 
