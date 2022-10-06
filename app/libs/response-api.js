@@ -65,9 +65,9 @@ exports.update = (req, res) => {
         })
       );
     } else {
-      res
-        .status(200)
-        .json(exports.success(204, { message: `id ${id} not found` }));
+      
+        
+        res.status(404).json(exports.error(404, `id ${id} not found`));
     }
   };
 
