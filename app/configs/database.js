@@ -8,8 +8,8 @@ module.exports = {
     host: process.env.MYSQL_HOST,
     dialect: process.env.MYSQL_DIALECT,
     timezone: "+07:00",
-    migrationStorageTableSchema: "public",
-    schema: process.env.MYSQL_SCHEMA,
+    //migrationStorageTableSchema: "public",
+    //schema: process.env.MYSQL_SCHEMA,
     port: process.env.MYSQL_PORT,
   },
   production: {
@@ -19,8 +19,8 @@ module.exports = {
     host: process.env.MYSQL_HOST,
     dialect: process.env.MYSQL_DIALECT,
     timezone: "+07:00",
-    migrationStorageTableSchema: "public",
-    schema: process.env.MYSQL_SCHEMA,
+    //migrationStorageTableSchema: "public",
+    //schema: process.env.MYSQL_SCHEMA,
     port: process.env.MYSQL_PORT,
   },
 };

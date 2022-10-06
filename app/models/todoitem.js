@@ -21,11 +21,14 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       is_active: DataTypes.INTEGER,
       priority: DataTypes.STRING,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
+      deletedAt: DataTypes.DATE,
     },
     {
       sequelize,
-      modelName: TODOITEM_MODEL_NAME,
-      tableName: TODOITEM_TABLE_NAME,
+      modelName: "TodoItem",
+      tableName: "todoitems",
     }
   );
   return TodoItem;

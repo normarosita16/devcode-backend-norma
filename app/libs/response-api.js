@@ -41,19 +41,15 @@ exports.successPagination = (
 };
 
 exports.delete = (req, res) => {
-  const deleteResponse = (result, id, model) => {
+  const deleteResponse = (result, id) => {
     if (result >= 1) {
       res.status(200).json(
         exports.success(200, {
-          message: req.__("%s with id %s successfully deleted!", model, id),
+          message: `Success delete id ${id}`,
         })
       );
     } else {
-      res
-        .status(404)
-        .json(
-          exports.error(404, [req.__("%s with id %s not found!", model, id)])
-        );
+      res.status(404).json(exports.error(404, `id ${id} not found`));
     }
   };
 
@@ -61,17 +57,17 @@ exports.delete = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const updateResponse = (result, id, model) => {
+  const updateResponse = (result, id) => {
     if (result[0] >= 1) {
       res.status(200).json(
         exports.success(200, {
-          message: req.__("%s with id %s successfully updated", model, id),
+          message: `Success update id ${id}`,
         })
       );
     } else {
       res
         .status(200)
-        .json(exports.success(204, { message: req.__("No data updated") }));
+        .json(exports.success(204, { message: `id ${id} not found` }));
     }
   };
 

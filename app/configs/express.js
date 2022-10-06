@@ -4,6 +4,8 @@ const express = require("express");
 const glob = require("glob");
 const methodOverride = require("method-override");
 
+const todoItemRoute = require("../routes/todo-item-route");
+
 exports.start = (config) => {
   const app = express();
 
@@ -19,11 +21,21 @@ exports.start = (config) => {
   // support parsing of application/x-www-form-urlencoded post data
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  glob
-    .sync(`${__dirname}/../controllers/**/route.js`)
-    .forEach(async (routeFile) => {
-      require(routeFile)(app);
+  app.get(`/`, function (req, res) {
+    res.status(200).json({
+      status_code: 200,
+      success: false,
+      message: "berhasil masuk",
     });
+  });
+
+  app.use("/todo-items", todoItemRoute);
+
+  // glob
+  //   .sync(`${__dirname}/../controllers/todo-item/route.js`)
+  //   .forEach(async (routeFile) => {
+  //     require(routeFile)(app);
+  //   });
 
   try {
     app.listen(config.port, () => {

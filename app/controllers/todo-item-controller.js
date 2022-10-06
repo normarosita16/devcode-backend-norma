@@ -2,11 +2,12 @@
 const httpStatus = require("http-status-codes");
 
 // UTILS
-const response = require("../../libs/response-api");
+const response = require("../libs/response-api");
 
 // MODEL
-const db = require("../../models/index");
+const db = require("../models/index");
 const TodoItem = db.TodoItem;
+const Op = db.Sequelize.Op;
 
 exports.create = async (req, res) => {
   const { activity_group_id, title } = req.body;
@@ -29,17 +30,16 @@ exports.list = (req, res) => {
   const { activity_group_id, size, page } = req.query;
   const limit = size ? size : 10;
   const offset = page ? page * limit : 0;
-  let where;
+  var condition = activity_group_id
+    ? { activity_group_id: { [Op.eq]: activity_group_id } }
+    : null;
 
-  if (activity_group_id && activity_group_id.length > 0) {
-    where["activity_group_id"] = activity_group_id;
-  }
+  console.log(activity_group_id);
 
-  CmsTermCondition.findAndCountAll({
+  TodoItem.findAndCountAll({
     limit,
     offset,
-    where,
-    order: ["created_at", "ASC"],
+    where: condition,
   })
     .then((data) => {
       const payload = {
@@ -91,9 +91,7 @@ exports.delete = async (req, res) => {
     where: { id },
   })
     .then((result) => {
-      response
-        .delete(req, res)
-        .deleteResponse(result, id, "Syarat & Ketentuan");
+      response.delete(req, res).deleteResponse(result, id);
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
