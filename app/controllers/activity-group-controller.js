@@ -128,7 +128,7 @@ exports.update = async (req, res) => {
 
   } else {
 
-    TodoItem.update(
+    ActivityGroup.update(
 
       {
 
