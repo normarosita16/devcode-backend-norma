@@ -1,7 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
 
-
 module.exports = (sequelize, DataTypes) => {
   class ActivityGroup extends Model {
     /**
@@ -14,9 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   ActivityGroup.init(
     {
       id: { allowNull: true, primaryKey: true, type: DataTypes.INTEGER },
-
       title: DataTypes.STRING,
-      
+      email: DataTypes.STRING,
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
       deletedAt: DataTypes.DATE,

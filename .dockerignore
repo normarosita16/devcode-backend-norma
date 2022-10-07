@@ -1,0 +1,20 @@
+### Node ###
+# Logs
+npm-debug.log
+
+# Dependency directories
+node_modules
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Git
+.git
+.gitignore
+README.md
+LICENSE
+
+# VSCode
+.vscode

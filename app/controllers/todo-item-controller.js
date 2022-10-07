@@ -13,7 +13,9 @@ exports.create = async (req, res) => {
   const { activity_group_id, title } = req.body;
 
   if (!title && !activity_group_id) {
-    res.status(400).send({ message: "title and activity_group_id cannot be null" });
+    res
+      .status(400)
+      .send({ message: "title and activity_group_id cannot be null" });
   } else {
     TodoItem.create({
       activity_group_id,
@@ -70,25 +72,22 @@ exports.view = (req, res) => {
 exports.update = async (req, res) => {
   const { title, is_active, priority } = req.body;
 
- 
-    
-    TodoItem.update(
-      {
-        title,
-        is_active,
-        priority
-      },
-      {
-        where: { id: req.params.id, deletedAt: null },
-      }
-    )
-      .then((result) => {
-        response.update(req, res).updateResponse(result, req.params.id);
-      })
-      .catch((err) => {
-        res.status(500).send({ message: err.message });
-      });
-  
+  TodoItem.update(
+    {
+      title,
+      is_active,
+      priority,
+    },
+    {
+      where: { id: req.params.id, deletedAt: null },
+    }
+  )
+    .then((result) => {
+      response.update(req, res).updateResponse(result, req.params.id);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
 };
 
 exports.delete = async (req, res) => {
