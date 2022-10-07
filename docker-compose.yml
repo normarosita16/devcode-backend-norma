@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=devcodebackend 
+    ports:
+      - 3307:3306
+    volumes:
+      - db:/var/lib/mysql
+  app:
+    depends_on:
+      - mysqldb
+    build: ./app
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - 8090:3030
+    environment:
+      - MYSQL_HOST=mysqldb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=
+      - MYSQL_DBNAME=devcodebackend 
+      - MYSQL_PORT=3306
+    stdin_open: true
+    tty: true
+
+volumes: 
+  db:
