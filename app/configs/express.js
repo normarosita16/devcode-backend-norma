@@ -31,7 +31,7 @@ exports.start = (config) => {
   });
 
   app.use("/todo-items", todoItemRoute);
-  app.use("/activity-group", activityGroupRoute);
+  app.use("/activity-groups", activityGroupRoute);
 
   // glob
   //   .sync(`${__dirname}/../controllers/todo-item/route.js`)

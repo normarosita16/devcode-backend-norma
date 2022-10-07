@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
   const { title, email } = req.body;
 
   if (!title) {
-    res.status(400).send({ message: "title cannot be null" });
+    res.status(400).json(response.error(400, `title cannot be null`, false));
   } else {
     ActivityGroup.create({
       title,
@@ -66,6 +66,17 @@ exports.view = (req, res) => {
   ActivityGroup.findByPk(req.params.id)
 
     .then((result) => {
+      if (!result)
+        res
+          .status(404)
+          .json(
+            response.error(
+              404,
+              `Activity with ID ${req.params.id} Not Found`,
+              false
+            )
+          );
+
       res.status(httpStatus.OK).json(response.success(httpStatus.OK, result));
     })
 
@@ -78,7 +89,7 @@ exports.update = async (req, res) => {
   const { title } = req.body;
 
   if (!title) {
-    res.status(400).send({ message: "title cannot be null" });
+    res.status(400).json(response.error(400, `title cannot be null`, false));
   } else {
     ActivityGroup.update(
       {

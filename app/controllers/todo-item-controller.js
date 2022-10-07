@@ -12,10 +12,12 @@ const Op = db.Sequelize.Op;
 exports.create = async (req, res) => {
   const { activity_group_id, title } = req.body;
 
-  if (!title && !activity_group_id) {
+  if (!title || !activity_group_id) {
     res
       .status(400)
-      .send({ message: "title and activity_group_id cannot be null" });
+      .json(
+        response.error(400, `title & activity group cannot be null`, false)
+      );
   } else {
     TodoItem.create({
       activity_group_id,
@@ -62,6 +64,16 @@ exports.list = (req, res) => {
 exports.view = (req, res) => {
   TodoItem.findByPk(req.params.id)
     .then((result) => {
+      if (!result)
+        res
+          .status(404)
+          .json(
+            response.error(
+              404,
+              `TodoItem with ID ${req.params.id} Not Found`,
+              false
+            )
+          );
       res.status(httpStatus.OK).json(response.success(httpStatus.OK, result));
     })
     .catch((err) => {

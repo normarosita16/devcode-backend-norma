@@ -1,5 +1,5 @@
 FROM node:10
-WORKDIR /usr/src/app
+WORKDIR /usr/app/index
 COPY package*.json ./
 
 USER root
